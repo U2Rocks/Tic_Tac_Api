@@ -1,9 +1,5 @@
 package main
 
-// TODO
-// 3. setup basic routes for creating users/games and deleting them
-// 4. create routes for query status of games/game_boards and listing players
-
 import (
 	"TicTac_Api/database"
 	"TicTac_Api/models"
