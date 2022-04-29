@@ -11,8 +11,8 @@ This backend uses **Fiber** to handle setup and manage api routes and **Gorm** t
 ## Routes
 
 - User Routes: **/ticgame/users/all**[GET] -> **/ticgame/users/add**[POST] -> **/ticgame/users/user**[POST] -> **/ticgame/users/update**[POST] -> **/ticgame/users/delete**[POST]
-- Game Routes: **/ticgame/games/new**[POST] -> **/ticgame/delete**[POST] -> **/ticgame/games/turn**[POST]
-- Board Routes: **/ticgame/boards/status**[POST]
+- Game Routes: **/ticgame/games/new**[POST] -> **/ticgame/delete**[POST] -> **/ticgame/games/turn**[POST] -> **/ticgame/games/all**[GET]
+- Board Routes: **/ticgame/boards/status**[POST] -> **/ticgame/boards/all**[GET]
 
 ## Final Comments and Notes
 
