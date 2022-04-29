@@ -25,10 +25,12 @@ func initialize_routes(app *fiber.App) {
 	// routes that interact with games
 	app.Post("/ticgame/games/new", routes.NewGameStart) // start a new game(Tested)
 	app.Post("/ticgame/delete", routes.EndGame)         // delete a game and corresponding game board(Tested)
-	app.Post("/ticgame/games/turn", routes.TakeTurn)    // take a turn for a player
+	app.Post("/ticgame/games/turn", routes.TakeTurn)    // take a turn for a player(Tested)
+	app.Get("/ticgame/games/all", routes.GetAllGames)   // return a json list of all games and their info(Tested)
 
 	// routes that interact with boards
 	app.Post("/ticgame/boards/status", routes.BoardState) // get a boards status(Tested)
+	app.Get("/ticgame/boards/all", routes.GetAllBoards)   // get all boards statuses(Tested)
 }
 
 // function that opens db connection and migrates tables

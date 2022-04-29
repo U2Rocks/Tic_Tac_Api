@@ -30,3 +30,11 @@ func BoardState(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(GameBoard)
 }
+
+func GetAllBoards(c *fiber.Ctx) error {
+	db := database.DBC
+	var BoardList []models.GameBoard
+
+	db.Find(&BoardList)
+	return c.Status(200).JSON(BoardList)
+}

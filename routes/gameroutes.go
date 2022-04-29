@@ -12,7 +12,6 @@ import (
 
 // this function creates a new game
 func NewGameStart(c *fiber.Ctx) error {
-	// things needed for new game -> gamename, boardID, playerone, playertwo, Iswinner, CurrentPlayer
 	db := database.DBC
 	newGame := new(models.NewGameInfo)
 	emptyBoard := new(models.GameBoard)
@@ -154,12 +153,20 @@ func TakeTurn(c *fiber.Ctx) error {
 	helperfunctions.ReplaceSquare(GameUser.Symbol, correctedField, &GameBoard)
 	db.Save(&GameBoard) // save board state before check
 	winnerFound := helperfunctions.CheckForWinner(&GameBoard)
+	tieFound := helperfunctions.CheckForTie(&GameBoard)
 	// switch current player if winner not found(PLAYER NOT BEING SWITCHED?)
 	if winnerFound == false {
 		// function to switch current player
-		helperfunctions.SwitchPlayer(int(GameUser.ID), &TicGame)
-		finalMessage = "User: " + TurnInput.Username + " has successfully taken their turn."
-		db.Save(&TicGame)
+		if tieFound == false {
+			helperfunctions.SwitchPlayer(int(GameUser.ID), &TicGame)
+			finalMessage = "User: " + TurnInput.Username + " has successfully taken their turn."
+			db.Save(&TicGame)
+		} else {
+			TicGame.IsWinner = true
+			TicGame.WinningPlayer = "No Winner/Tie"
+			finalMessage = "The game has ended in a tie"
+			db.Save(&TicGame)
+		}
 	} else {
 		// get game object and set is_winner to true and winning_player to current_player
 		TicGame.IsWinner = true
@@ -169,4 +176,12 @@ func TakeTurn(c *fiber.Ctx) error {
 	}
 
 	return helperfunctions.ReturnJSONResponse(c, 200, finalMessage)
+}
+
+func GetAllGames(c *fiber.Ctx) error {
+	db := database.DBC
+	var GameList []models.Game
+
+	db.Find(&GameList)
+	return c.Status(200).JSON(GameList)
 }

@@ -211,3 +211,13 @@ func SwitchPlayer(inputID int, G *models.Game) {
 		G.CurrentPlayer = newUsername
 	}
 }
+
+func CheckForTie(G *models.GameBoard) bool {
+	// check if all squares are not equal to a space
+	if G.SqOne != " " && G.SqTwo != " " && G.SqThree != " " && G.SqFour != " " && G.SqFive != " " && G.SqSix != " " && G.SqSeven != " " && G.SqEight != " " && G.SqNine != " " {
+		// return true if that condition met
+		return true
+	}
+	// return true if that condition met
+	return false
+}

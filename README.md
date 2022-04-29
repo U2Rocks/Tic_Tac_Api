@@ -19,4 +19,3 @@ This backend uses **Fiber** to handle setup and manage api routes and **Gorm** t
 - The api returns all text messages to the client in a json object containing an statuscode/errorcode and a message
 - The index html page is currently not being used
 - BUG: The api currently does not know how to handle a tie(all spaces filled without a winner)
-- Things to maybe add: route to see all game boards? route to list all active games?
